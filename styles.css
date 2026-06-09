@@ -206,7 +206,9 @@ img {
 
 .intro-band,
 .works,
+.shorts,
 .making,
+.spotmicro,
 .about,
 .contact {
   max-width: 1480px;
@@ -224,6 +226,8 @@ img {
 .intro-band div,
 .about-grid article,
 .work-card,
+.short-card,
+.update-card,
 .making {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -358,6 +362,111 @@ img {
   font-weight: 800;
 }
 
+.carousel-shell {
+  position: relative;
+}
+
+.shorts-track {
+  display: grid;
+  grid-auto-columns: minmax(280px, 360px);
+  grid-auto-flow: column;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 4px 4px 24px;
+  scroll-padding: 4px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.shorts-track::-webkit-scrollbar {
+  display: none;
+}
+
+.short-card {
+  overflow: hidden;
+  border-radius: var(--radius);
+  scroll-snap-align: start;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.short-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 76px rgba(0, 0, 0, 0.15);
+}
+
+.short-card a {
+  display: grid;
+  min-height: 100%;
+}
+
+.short-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--soft);
+}
+
+.short-card div {
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+}
+
+.short-card h3 {
+  margin: 0;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.14;
+}
+
+.short-card span {
+  color: #111;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 42%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1;
+  backdrop-filter: blur(16px);
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.carousel-button:hover {
+  transform: scale(1.04);
+}
+
+.carousel-button:disabled {
+  opacity: 0.36;
+  cursor: default;
+}
+
+.carousel-button:disabled:hover {
+  transform: none;
+}
+
+.carousel-button.prev {
+  left: -18px;
+}
+
+.carousel-button.next {
+  right: -18px;
+}
+
 .making {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.65fr);
@@ -453,6 +562,62 @@ img {
   border-radius: 50%;
 }
 
+.spotmicro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.52fr);
+  gap: clamp(24px, 4vw, 58px);
+  align-items: stretch;
+  padding-top: 0;
+}
+
+.spotmicro-copy {
+  display: grid;
+  align-content: center;
+  min-height: 420px;
+  padding: clamp(28px, 5vw, 58px);
+  border: 1px solid var(--line);
+  border-radius: 36px;
+  background: #111;
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.spotmicro-copy .eyebrow,
+.spotmicro-copy p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.spotmicro-copy h2 {
+  margin: 0;
+  font-size: clamp(44px, 7vw, 92px);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.spotmicro-copy p {
+  max-width: 760px;
+  margin: 24px 0 0;
+  font-size: clamp(18px, 2vw, 25px);
+  font-weight: 680;
+  line-height: 1.36;
+}
+
+.update-card {
+  display: grid;
+  overflow: hidden;
+  border-radius: var(--radius);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.update-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+}
+
+.update-card figure {
+  margin: 0;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -497,7 +662,8 @@ img {
 
 @media (max-width: 940px) {
   .hero,
-  .making {
+  .making,
+  .spotmicro {
     grid-template-columns: 1fr;
   }
 
@@ -514,6 +680,10 @@ img {
   .about-grid {
     grid-template-columns: 1fr;
   }
+
+  .spotmicro {
+    padding-top: clamp(28px, 6vw, 52px);
+  }
 }
 
 @media (max-width: 640px) {
@@ -528,6 +698,8 @@ img {
   .nav {
     width: 100%;
     justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
   }
 
   .hero h1 {
@@ -542,11 +714,25 @@ img {
 
   .intro-band div,
   .work-copy,
-  .about-grid article {
+  .about-grid article,
+  .short-card div {
     padding: 22px;
+  }
+
+  .shorts-track {
+    grid-auto-columns: minmax(260px, 86vw);
+    margin-inline: -4px;
+  }
+
+  .carousel-button {
+    display: none;
   }
 
   .feature-panel {
     min-height: 280px;
+  }
+
+  .spotmicro-copy {
+    min-height: 340px;
   }
 }
