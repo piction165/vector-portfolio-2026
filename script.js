@@ -32,21 +32,37 @@ if (track && prevButton && nextButton) {
 }
 
 if (contactForm) {
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const data = new FormData(contactForm);
     const title = String(data.get("title") || "").trim();
     const email = String(data.get("email") || "").trim();
     const message = String(data.get("message") || "").trim();
-    const subject = title ? `[Vector World 문의] ${title}` : "Vector World 문의";
-    const body = [`회신 이메일: ${email}`, "", message || "문의 내용을 적어주세요."].join("\n");
-    const mailto = `mailto:vector@geekble.kr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const button = contactForm.querySelector('button[type="submit"]');
 
-    window.location.href = mailto;
+    if (button) button.disabled = true;
+    if (contactNote) contactNote.textContent = "문의 내용을 전송하는 중입니다.";
 
-    if (contactNote) {
-      contactNote.textContent = "메일 앱에서 내용을 확인한 뒤 전송하면 문의가 완료됩니다.";
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, email, message }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send inquiry");
+      }
+
+      contactForm.reset();
+      if (contactNote) contactNote.textContent = "문의가 전송되었습니다. 빠르게 확인하겠습니다.";
+    } catch (error) {
+      if (contactNote) {
+        contactNote.textContent = "전송에 실패했습니다. 잠시 후 다시 시도하거나 vector@geekble.kr로 보내주세요.";
+      }
+    } finally {
+      if (button) button.disabled = false;
     }
   });
 }
