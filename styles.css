@@ -674,6 +674,17 @@ img {
   margin: 0;
 }
 
+.spotmicro-photo {
+  background: var(--soft);
+}
+
+.spotmicro-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 52% 52%;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
