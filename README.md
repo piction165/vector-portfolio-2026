@@ -6,7 +6,7 @@ Static personal portfolio for Vector.
 
 - `index.html` - landing page content
 - `styles.css` - responsive Apple Developer-inspired visual system
-- `assets/vector-world/` - Vector avatar and YouTube thumbnails
+- `assets/vector-world/` - compressed Vector avatar, photos, and YouTube thumbnails
 
 ## Deploy
 
