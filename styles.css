@@ -364,6 +364,40 @@ button {
   border-radius: 999px;
 }
 
+.info-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 26px;
+  padding: 5px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.info-tabs button {
+  flex: 1;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.info-tabs button.active {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(0, 102, 204, 0.22);
+}
+
+.info-panels h3 {
+  margin-top: 0;
+}
+
 .filter-bar button {
   min-height: 34px;
   border: 0;
@@ -618,99 +652,6 @@ button {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
-.geekble-hero-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
-  gap: 18px;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 clamp(22px, 5vw, 80px) clamp(32px, 5vw, 72px);
-}
-
-.geekble-tile {
-  min-height: 420px;
-  padding: clamp(28px, 5vw, 64px);
-  border: 1px solid rgba(0, 102, 204, 0.16);
-  border-radius: var(--radius);
-  background:
-    linear-gradient(135deg, rgba(0, 102, 204, 0.08), transparent 42%),
-    #fff;
-  box-shadow: var(--shadow);
-}
-
-.geekble-tile h2 {
-  margin: 0;
-  color: var(--blue);
-  font-size: clamp(52px, 9vw, 132px);
-  line-height: 0.92;
-  font-weight: 820;
-}
-
-.geekble-tile p {
-  max-width: 620px;
-  margin: 24px 0 0;
-  color: #424245;
-  font-size: clamp(20px, 2vw, 30px);
-  line-height: 1.28;
-  font-weight: 650;
-}
-
-.metric-stack {
-  display: grid;
-  gap: 18px;
-}
-
-.metric-card {
-  min-height: 128px;
-  padding: 28px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #fff;
-  box-shadow: var(--shadow-soft);
-}
-
-.metric-card strong {
-  display: block;
-  color: var(--blue);
-  font-size: clamp(34px, 5vw, 60px);
-  line-height: 1;
-}
-
-.metric-card span {
-  display: block;
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.role-strip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.role-card {
-  min-height: 240px;
-  padding: 30px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #fff;
-  box-shadow: var(--shadow-soft);
-}
-
-.role-card h3 {
-  margin: 0 0 14px;
-  color: var(--blue);
-  font-size: 26px;
-}
-
-.role-card p {
-  margin: 0;
-  color: #424245;
-  font-size: 17px;
-}
-
 .image-frame {
   overflow: hidden;
   border-radius: var(--radius);
@@ -732,9 +673,7 @@ button {
   .works-grid,
   .intro-grid,
   .two-col,
-  .visual-item,
-  .geekble-hero-card,
-  .role-strip {
+  .visual-item {
     grid-template-columns: 1fr;
   }
 
@@ -789,7 +728,8 @@ button {
     width: 100%;
   }
 
-  .filter-bar button {
+  .filter-bar button,
+  .info-tabs button {
     flex: 1;
     padding: 0 10px;
   }
