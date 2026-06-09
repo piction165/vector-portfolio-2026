@@ -18,27 +18,37 @@ module.exports = async function handler(request, response) {
     return response.status(400).json({ error: "Invalid email" });
   }
 
-  const form = new URLSearchParams({
+  const payload = {
     _subject: `[Vector World 문의] ${cleanTitle}`,
     _template: "table",
     _captcha: "false",
+    _replyto: cleanEmail,
     title: cleanTitle,
     email: cleanEmail,
     message: cleanMessage || "(내용 없음)",
-  });
+  };
 
   const submitResponse = await fetch("https://formsubmit.co/ajax/vector@geekble.kr", {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/json",
       Accept: "application/json",
+      Referer: "https://vector-portfolio-2026.vercel.app/",
     },
-    body: form,
+    body: JSON.stringify(payload),
   });
 
   if (!submitResponse.ok) {
     return response.status(502).json({ error: "Failed to forward inquiry" });
   }
 
-  return response.status(200).json({ ok: true });
+  const result = await submitResponse.json();
+  const submitMessage = String(result.message || "");
+  const needsActivation = submitMessage.toLowerCase().includes("activation");
+
+  if (result.success === "false" && !needsActivation) {
+    return response.status(502).json({ error: "Failed to forward inquiry" });
+  }
+
+  return response.status(200).json({ ok: true, needsActivation });
 };

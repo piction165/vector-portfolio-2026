@@ -710,6 +710,12 @@ section {
   box-shadow: var(--shadow-soft);
 }
 
+.contact-form button:disabled {
+  cursor: wait;
+  opacity: 0.62;
+  transform: none;
+}
+
 .form-note {
   margin: 0;
   color: var(--muted);

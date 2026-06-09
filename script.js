@@ -55,8 +55,13 @@ if (contactForm) {
         throw new Error("Failed to send inquiry");
       }
 
+      const result = await response.json();
       contactForm.reset();
-      if (contactNote) contactNote.textContent = "문의가 전송되었습니다. 빠르게 확인하겠습니다.";
+      if (contactNote) {
+        contactNote.textContent = result.needsActivation
+          ? "수신 메일함에서 FormSubmit 확인 링크를 한 번 승인하면 문의 수신이 시작됩니다."
+          : "문의가 전송되었습니다. 빠르게 확인하겠습니다.";
+      }
     } catch (error) {
       if (contactNote) {
         contactNote.textContent = "전송에 실패했습니다. 잠시 후 다시 시도하거나 vector@geekble.kr로 보내주세요.";
