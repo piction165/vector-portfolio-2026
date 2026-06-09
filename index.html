@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f0e8" />
+    <meta
+      name="description"
+      content="VECTOR portfolio: visual design, robotics, interactive hardware, and AI making works by year and genre."
+    />
+    <title>VECTOR Portfolio</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="VECTOR Portfolio home">
+        <span class="brand-mark">V</span>
+        <span>VECTOR</span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">2026 Portfolio Archive</p>
+          <h1 id="hero-title">VECTOR</h1>
+          <p class="role">Visual Direction · Making · Robotics · AI Workflow</p>
+          <p class="intro">
+            아이디어를 화면, 로봇, 인터랙티브 하드웨어로 구현하는 메이커 포트폴리오.
+            년도와 장르 기준으로 작업의 흐름을 볼 수 있게 정리했습니다.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#work">포트폴리오 보기</a>
+            <a class="button ghost" href="mailto:plaes165@gmail.com">plaes165@gmail.com</a>
+          </div>
+        </div>
+        <figure class="hero-media" aria-label="대표 작업 이미지">
+          <img src="./assets/nockout-arena.png" alt="NOCKOUT Protocol arena visual" />
+          <figcaption>
+            <strong>NOCKOUT Protocol</strong>
+            <span>Game concept · robot arena · 2026</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="summary-band" aria-label="작업 요약">
+        <div>
+          <strong>06</strong>
+          <span>Selected works</span>
+        </div>
+        <div>
+          <strong>02</strong>
+          <span>Core genres</span>
+        </div>
+        <div>
+          <strong>2026</strong>
+          <span>Main archive</span>
+        </div>
+        <div>
+          <strong>AI + HW</strong>
+          <span>Workflow focus</span>
+        </div>
+      </section>
+
+      <section class="section" id="work" aria-labelledby="work-title">
+        <div class="section-heading">
+          <p class="eyebrow">Portfolio</p>
+          <h2 id="work-title">년도별, 장르별로 보는 작업</h2>
+          <p>
+            2026 작업을 중심으로 비주얼 산출물과 실제 제작/하드웨어 프로젝트를 분리해 볼 수 있습니다.
+          </p>
+        </div>
+
+        <div class="filters" aria-label="포트폴리오 필터">
+          <div class="filter-group" aria-label="연도 필터">
+            <button class="filter active" type="button" data-filter-type="year" data-filter-value="all">
+              All years
+            </button>
+            <button class="filter" type="button" data-filter-type="year" data-filter-value="2026">
+              2026
+            </button>
+            <button class="filter" type="button" data-filter-type="year" data-filter-value="2025">
+              2025
+            </button>
+          </div>
+          <div class="filter-group" aria-label="장르 필터">
+            <button class="filter active" type="button" data-filter-type="genre" data-filter-value="all">
+              All genres
+            </button>
+            <button class="filter" type="button" data-filter-type="genre" data-filter-value="visual">
+              비주얼
+            </button>
+            <button class="filter" type="button" data-filter-type="genre" data-filter-value="making">
+              메이킹
+            </button>
+          </div>
+        </div>
+
+        <div class="work-grid" id="workGrid" aria-live="polite">
+          <article class="work-item featured" data-year="2026" data-genre="making visual">
+            <a href="https://github.com/onlyai61/nockout-protocol" target="_blank" rel="noreferrer">
+              <img src="./assets/nockout-arena.png" alt="NOCKOUT Protocol game arena" />
+              <div class="work-body">
+                <div class="meta">
+                  <span>2026</span>
+                  <span>Making</span>
+                  <span>Visual</span>
+                </div>
+                <h3>NOCKOUT Protocol</h3>
+                <p>
+                  현실 로봇 파손 비용을 가상 아레나로 옮기는 배틀 로봇 게임 콘셉트와 WebGL 데모 제작.
+                </p>
+              </div>
+            </a>
+          </article>
+
+          <article class="work-item" data-year="2026" data-genre="making">
+            <a href="https://github.com/onlyai61/nockout-protocol" target="_blank" rel="noreferrer">
+              <img src="./assets/nockout-wireframe.png" alt="NOCKOUT robot lab interface wireframe" />
+              <div class="work-body">
+                <div class="meta">
+                  <span>2026</span>
+                  <span>Making</span>
+                </div>
+                <h3>Robot Lab Wireframe</h3>
+                <p>
+                  로봇 선택, 장착, 업그레이드 흐름을 게임 UI로 정리한 모바일/랜드스케이프 와이어프레임.
+                </p>
+              </div>
+            </a>
+          </article>
+
+          <article class="work-item" data-year="2026" data-genre="visual">
+            <a href="#contact">
+              <img src="./assets/only-ai-recruit.png" alt="ONLY AI game recruit poster" />
+              <div class="work-body">
+                <div class="meta">
+                  <span>2026</span>
+                  <span>Visual</span>
+                </div>
+                <h3>ONLY AI Game Recruiting</h3>
+                <p>
+                  AI 게임 개발팀 모집을 위한 포스터, 온보딩 슬라이드, 디스코드 운영용 비주얼 패키지.
+                </p>
+              </div>
+            </a>
+          </article>
+
+          <article class="work-item" data-year="2026" data-genre="visual">
+            <a href="#contact">
+              <img src="./assets/printing-poster.png" alt="3D printing workshop poster" />
+              <div class="work-body">
+                <div class="meta">
+                  <span>2026</span>
+                  <span>Visual</span>
+                </div>
+                <h3>3D Printing Service Poster</h3>
+                <p>
+                  3D 프린팅 워크숍과 제작 서비스를 소개하는 A4 포스터형 홍보 디자인.
+                </p>
+              </div>
+            </a>
+          </article>
+
+          <article class="work-item" data-year="2026" data-genre="making">
+            <a href="#contact">
+              <img src="./assets/scala-vision.jpg" alt="Camera view from physical AI agent setup" />
+              <div class="work-body">
+                <div class="meta">
+                  <span>2026</span>
+                  <span>Making</span>
+                </div>
+                <h3>Scala Physical AI Agent</h3>
+                <p>
+                  라즈베리파이, 카메라, 마이크, 센서를 결합한 물리 AI 에이전트 프로토타입.
+                </p>
+              </div>
+            </a>
+          </article>
+
+          <article class="work-item" data-year="2025" data-genre="making visual">
+            <a href="https://github.com/piction165/signal" target="_blank" rel="noreferrer">
+              <img src="./assets/only-ai-astronaut.png" alt="AI generated astronaut visual" />
+              <div class="work-body">
+                <div class="meta">
+                  <span>2025</span>
+                  <span>Visual</span>
+                  <span>Making</span>
+                </div>
+                <h3>AI Workflow Experiments</h3>
+                <p>
+                  생성형 이미지, 웹앱, 자동화 도구를 조합해 빠르게 시안과 데모를 만드는 제작 워크플로.
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split" id="about" aria-labelledby="about-title">
+        <div class="section-heading">
+          <p class="eyebrow">About</p>
+          <h2 id="about-title">상상을 움직이는 형태로 바꾸는 사람</h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            벡터의 포트폴리오는 예쁜 결과물만 모으는 방식보다, 아이디어가 실제로 작동하는 과정까지
+            보여주는 아카이브에 가깝습니다. 비주얼은 설득을 만들고, 메이킹은 그 설득을 움직이게 합니다.
+          </p>
+          <div class="skill-list" aria-label="주요 역량">
+            <span>Visual Direction</span>
+            <span>Robotics Prototyping</span>
+            <span>AI-assisted Design</span>
+            <span>Web Demo</span>
+            <span>Hardware Debugging</span>
+            <span>Team Onboarding</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-band" id="contact" aria-labelledby="contact-title">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title">프로젝트, 외주, 협업 문의</h2>
+        </div>
+        <div class="contact-actions">
+          <a class="button primary" href="mailto:plaes165@gmail.com">메일 보내기</a>
+          <a class="button ghost" href="https://github.com/piction165" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 VECTOR. All rights reserved.</span>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
