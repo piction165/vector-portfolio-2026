@@ -10,4 +10,10 @@ Static personal portfolio for Vector.
 
 ## Deploy
 
-GitHub Pages serves this repository from the `main` branch.
+Vercel serves this repository from the `main` branch.
+
+- Framework preset: Other
+- Build command: none
+- Output directory: `.`
+
+GitHub Pages can still serve the same static files if needed.

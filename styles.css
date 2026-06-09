@@ -56,6 +56,10 @@ img {
   max-width: 100%;
 }
 
+section {
+  scroll-margin-top: 76px;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -612,11 +616,105 @@ img {
 }
 
 .contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(360px, 0.58fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
   border-top: 1px solid var(--line);
 }
 
 .contact h2 {
   max-width: 1000px;
+}
+
+.contact-copy > p:not(.eyebrow) {
+  max-width: 760px;
+  margin: 24px 0 0;
+  color: #303033;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 680;
+  line-height: 1.45;
+}
+
+.contact-form {
+  display: grid;
+  gap: 16px;
+  padding: clamp(24px, 3.4vw, 40px);
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: var(--panel);
+  box-shadow: var(--shadow-soft);
+}
+
+.contact-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.contact-form span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 650;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.contact-form input {
+  min-height: 52px;
+  padding: 0 16px;
+}
+
+.contact-form textarea {
+  min-height: 142px;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+.contact-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  border: 0;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 820;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.contact-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .footer {
@@ -645,7 +743,8 @@ img {
   .intro-band,
   .work-grid,
   .notes-layout,
-  .about-grid {
+  .about-grid,
+  .contact {
     grid-template-columns: 1fr;
   }
 
@@ -676,7 +775,8 @@ img {
 
   .primary-link,
   .secondary-link,
-  .contact-links a {
+  .contact-links a,
+  .contact-form button {
     width: 100%;
   }
 
@@ -685,7 +785,8 @@ img {
   .about-grid article,
   .short-card div,
   .notes-main,
-  .notes-side div {
+  .notes-side div,
+  .contact-form {
     padding: 22px;
   }
 

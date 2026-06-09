@@ -357,12 +357,34 @@
       </section>
 
       <section class="contact" id="contact">
-        <p class="eyebrow">Contact</p>
-        <h2>이상한 아이디어를 실제로 움직이게 만들겠습니다.</h2>
-        <div class="contact-links">
-          <a href="mailto:vector@geekble.kr">vector@geekble.kr</a>
-          <a href="https://www.instagram.com/geekble_vector/" target="_blank" rel="noreferrer">@geekble_vector</a>
+        <div class="contact-copy">
+          <p class="eyebrow">Contact</p>
+          <h2>이상한 아이디어를 실제로 움직이게 만들겠습니다.</h2>
+          <p>
+            제작, 촬영, 피지컬 AI, 하드웨어 콘텐츠 협업 문의를 남겨주세요. 제목과 회신 받을 이메일을
+            적으면 바로 메일로 연결됩니다.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:vector@geekble.kr">vector@geekble.kr</a>
+            <a href="https://www.instagram.com/geekble_vector/" target="_blank" rel="noreferrer">@geekble_vector</a>
+          </div>
         </div>
+        <form class="contact-form" data-contact-form>
+          <label>
+            <span>Title</span>
+            <input name="title" type="text" autocomplete="off" placeholder="문의 제목" required />
+          </label>
+          <label>
+            <span>Email</span>
+            <input name="email" type="email" autocomplete="email" placeholder="reply@example.com" required />
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" rows="5" placeholder="프로젝트 내용이나 문의 사항을 적어주세요."></textarea>
+          </label>
+          <button type="submit">Send inquiry</button>
+          <p class="form-note" data-contact-note>메일 앱이 열리면 내용을 확인하고 전송하면 됩니다.</p>
+        </form>
       </section>
     </main>
 
