@@ -45,10 +45,18 @@ if (contactForm) {
     if (contactNote) contactNote.textContent = "문의 내용을 전송하는 중입니다.";
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://formsubmit.co/ajax/vector@geekble.kr", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, email, message }),
+        body: JSON.stringify({
+          _subject: `[Vector World 문의] ${title}`,
+          _template: "table",
+          _captcha: "false",
+          _replyto: email,
+          title,
+          email,
+          message: message || "(내용 없음)",
+        }),
       });
 
       if (!response.ok) {
@@ -56,9 +64,15 @@ if (contactForm) {
       }
 
       const result = await response.json();
+      const needsActivation = String(result.message || "").toLowerCase().includes("activation");
+
+      if (result.success === "false" && !needsActivation) {
+        throw new Error("Failed to send inquiry");
+      }
+
       contactForm.reset();
       if (contactNote) {
-        contactNote.textContent = result.needsActivation
+        contactNote.textContent = needsActivation
           ? "수신 메일함에서 FormSubmit 확인 링크를 한 번 승인하면 문의 수신이 시작됩니다."
           : "문의가 전송되었습니다. 빠르게 확인하겠습니다.";
       }
