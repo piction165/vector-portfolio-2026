@@ -108,8 +108,8 @@ img {
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(78px, 10vw, 142px);
-  line-height: 0.86;
+  font-size: clamp(58px, 8.5vw, 126px);
+  line-height: 0.9;
   font-weight: 950;
 }
 
@@ -243,6 +243,62 @@ img {
   margin: 18px 0 0;
   color: var(--muted);
   font-size: 18px;
+}
+
+.timeline-section,
+.credential-section {
+  border-top: 1px solid var(--line);
+}
+
+.timeline,
+.credential-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.timeline {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.credential-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.timeline article,
+.credential-grid article {
+  min-height: 220px;
+  padding: 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(29, 24, 18, 0.07);
+}
+
+.timeline time,
+.credential-grid time {
+  display: block;
+  color: var(--accent-2);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.timeline h3,
+.credential-grid h3 {
+  margin: 14px 0 8px;
+  font-size: 24px;
+  line-height: 1.18;
+}
+
+.timeline p,
+.credential-grid p {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font-weight: 850;
+}
+
+.timeline span {
+  color: var(--muted);
 }
 
 .filters {
@@ -389,6 +445,42 @@ img {
   font-weight: 850;
 }
 
+.skill-meter-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.skill-meter-list div {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+  padding: 0 14px;
+  background: #fffaf0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.skill-meter-list div::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 4px;
+  background: var(--accent);
+  opacity: 0.22;
+}
+
+.skill-meter-list strong {
+  color: var(--accent-2);
+}
+
 .contact-band {
   display: flex;
   align-items: end;
@@ -403,6 +495,12 @@ img {
 
 .contact-band .eyebrow {
   color: #f2b84b;
+}
+
+.contact-band p:not(.eyebrow) {
+  max-width: 560px;
+  margin: 16px 0 0;
+  color: rgba(244, 240, 232, 0.72);
 }
 
 .contact-band .button.primary {
@@ -449,7 +547,9 @@ img {
   }
 
   .summary-band,
-  .work-grid {
+  .work-grid,
+  .timeline,
+  .credential-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -508,7 +608,10 @@ img {
   }
 
   .summary-band,
-  .work-grid {
+  .work-grid,
+  .timeline,
+  .credential-grid,
+  .skill-meter-list {
     grid-template-columns: 1fr;
   }
 
