@@ -1,14 +1,13 @@
-# JUNG SUE YEON Portfolio
+# Vector World
 
-Static portfolio redesign for Jung Sue Yeon, based on the existing Figma Site content.
+Static personal portfolio for Vector.
 
 ## Structure
 
-- `index.html` - page content
-- `styles.css` - responsive visual system
-- `script.js` - year and genre filtering for portfolio works
-- `assets/` - project thumbnails
+- `index.html` - landing page content
+- `styles.css` - responsive Apple Developer-inspired visual system
+- `assets/vector-world/` - Vector avatar and YouTube thumbnails
 
 ## Deploy
 
-Import this repository in Vercel with the default static settings.
+GitHub Pages serves this repository from the `main` branch.
