@@ -161,7 +161,7 @@ module.exports = async (request, response) => {
       response.end(JSON.stringify({ ok: true, summary: result.summary, needsActivation: result.needsActivation }));
     } catch (error) {
       json(response, 500);
-      response.end(JSON.stringify({ error: "notification_failed" }));
+      response.end(JSON.stringify({ error: "notification_failed", detail: error.message || "unknown" }));
     }
     return;
   }
