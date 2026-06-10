@@ -1,5 +1,6 @@
 const OPENAI_ENDPOINT = "https://api.openai.com/v1/responses";
 const MODEL = "gpt-4.1-mini";
+const SITE_ORIGIN = "https://vector-portfolio-2026.vercel.app";
 
 const systemPrompt = `
 You are Vector Bot, a concise Korean portfolio consultation assistant for Vector World.
@@ -105,7 +106,12 @@ ${transcript || "(대화 없음)"}`,
   const summary = extractText(data) || transcript || "상담 내용이 비어 있습니다.";
   const mailResponse = await fetch(notifyEndpoint, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Origin: SITE_ORIGIN,
+      Referer: `${SITE_ORIGIN}/`,
+    },
     body: JSON.stringify({
       _subject: `[Vector Chat 상담 요약] ${topic}`,
       _template: "table",
@@ -118,11 +124,14 @@ ${transcript || "(대화 없음)"}`,
   });
 
   const mailResult = await mailResponse.json().catch(() => ({}));
+  const needsActivation = String(mailResult.message || "").toLowerCase().includes("activation");
   if (!mailResponse.ok || mailResult.success === "false") {
-    throw new Error("mail_failed");
+    if (!needsActivation) {
+      throw new Error("mail_failed");
+    }
   }
 
-  return summary;
+  return { summary, needsActivation };
 };
 
 module.exports = async (request, response) => {
@@ -147,9 +156,9 @@ module.exports = async (request, response) => {
 
   if (body.action === "notify") {
     try {
-      const summary = await sendNotification({ apiKey, topic, contact, history });
+      const result = await sendNotification({ apiKey, topic, contact, history });
       json(response);
-      response.end(JSON.stringify({ ok: true, summary }));
+      response.end(JSON.stringify({ ok: true, summary: result.summary, needsActivation: result.needsActivation }));
     } catch (error) {
       json(response, 500);
       response.end(JSON.stringify({ error: "notification_failed" }));

@@ -245,8 +245,13 @@ const createConsultChat = () => {
         throw new Error(result.error || "notification_failed");
       }
 
-      appendMessage("상담 요약을 Vector에게 보냈습니다. 연락처를 남겼다면 확인 후 회신드릴게요.", "bot");
-      note.textContent = "상담 요약이 vector@geekble.kr로 전송되었습니다.";
+      if (result.needsActivation) {
+        appendMessage("상담 요약은 준비됐고, 수신 메일함에서 FormSubmit 활성화 링크를 한 번 승인하면 이후부터 메일로 전달됩니다.", "bot");
+        note.textContent = "vector@geekble.kr 메일함의 FormSubmit 활성화 링크를 승인해주세요.";
+      } else {
+        appendMessage("상담 요약을 Vector에게 보냈습니다. 연락처를 남겼다면 확인 후 회신드릴게요.", "bot");
+        note.textContent = "상담 요약이 vector@geekble.kr로 전송되었습니다.";
+      }
     } catch (error) {
       note.textContent = "요약 전송에 실패했습니다. 대화 내용을 복사해 vector@geekble.kr로 보내주세요.";
     } finally {
