@@ -783,6 +783,24 @@ section {
   object-fit: cover;
 }
 
+.ep-visual img {
+  padding: clamp(24px, 5vw, 64px);
+  object-fit: contain;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    #fff;
+  background-size: 32px 32px;
+}
+
+.ep-specs .case-service-grid article {
+  min-height: 260px;
+}
+
+.ep-specs .case-service-grid h3 {
+  font-size: clamp(42px, 6vw, 78px);
+}
+
 .case-summary {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
