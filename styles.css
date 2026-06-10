@@ -295,6 +295,20 @@ section {
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
 }
 
+.featured-work {
+  background: #111;
+  color: #fff;
+}
+
+.featured-work .work-copy p,
+.featured-work .eyebrow {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.featured-work .work-copy span {
+  color: #fff;
+}
+
 .work-card figure {
   margin: 0;
   background: var(--soft);
@@ -723,6 +737,218 @@ section {
   font-weight: 700;
 }
 
+.ep-page {
+  background-color: #fbfbfd;
+}
+
+.ep-hero,
+.ep-summary,
+.ep-services,
+.ep-process,
+.ep-deliverables,
+.ep-cta {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: clamp(58px, 8vw, 112px) clamp(22px, 5vw, 80px);
+}
+
+.ep-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.54fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: center;
+  min-height: calc(100svh - 52px);
+}
+
+.ep-hero-copy {
+  min-width: 0;
+  max-width: 980px;
+}
+
+.ep-hero h1,
+.ep-hero .lead {
+  max-width: 100%;
+}
+
+.ep-hero h1,
+.ep-process h2,
+.ep-cta h2 {
+  margin: 0;
+  font-size: clamp(46px, 7vw, 112px);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.ep-visual {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 38px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.ep-visual img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.ep-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding-top: 0;
+}
+
+.ep-summary div,
+.ep-service-grid article,
+.ep-steps article,
+.ep-deliverable-list article {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow-soft);
+}
+
+.ep-summary div {
+  display: grid;
+  align-content: space-between;
+  min-height: 180px;
+  padding: 24px;
+  border-radius: 24px;
+}
+
+.ep-summary span,
+.ep-service-grid span,
+.ep-steps span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.ep-summary strong {
+  margin-top: 28px;
+  font-size: clamp(23px, 2.4vw, 36px);
+  line-height: 1.12;
+}
+
+.ep-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ep-service-grid article {
+  min-height: 320px;
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: var(--radius);
+}
+
+.ep-service-grid h3 {
+  margin: 34px 0 18px;
+  font-size: clamp(30px, 3vw, 48px);
+  line-height: 1.08;
+}
+
+.ep-service-grid p,
+.ep-process-copy p,
+.ep-deliverable-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.ep-process {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(320px, 0.58fr);
+  gap: 18px;
+  align-items: stretch;
+  padding-top: 0;
+}
+
+.ep-process-copy {
+  display: grid;
+  align-content: center;
+  min-height: 460px;
+  padding: clamp(28px, 5vw, 58px);
+  border-radius: 36px;
+  background: #111;
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.ep-process-copy .eyebrow,
+.ep-process-copy p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.ep-process-copy p {
+  max-width: 840px;
+  margin-top: 24px;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.48;
+}
+
+.ep-steps {
+  display: grid;
+  gap: 18px;
+}
+
+.ep-steps article {
+  display: grid;
+  align-content: space-between;
+  min-height: 112px;
+  padding: 24px;
+  border-radius: 28px;
+}
+
+.ep-steps strong {
+  margin-top: 18px;
+  font-size: clamp(20px, 2vw, 30px);
+  line-height: 1.16;
+}
+
+.ep-deliverable-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ep-deliverable-list article {
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.ep-deliverable-list img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--soft);
+}
+
+.ep-deliverable-list div {
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+}
+
+.ep-deliverable-list h3 {
+  margin: 0;
+  font-size: clamp(25px, 2.4vw, 36px);
+  line-height: 1.12;
+}
+
+.ep-cta {
+  border-top: 1px solid var(--line);
+}
+
+.ep-cta h2 {
+  max-width: 1100px;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -734,15 +960,19 @@ section {
 
 @media (max-width: 940px) {
   .hero,
-  .spotmicro {
+  .spotmicro,
+  .ep-hero,
+  .ep-process {
     grid-template-columns: 1fr;
   }
 
-  .hero {
+  .hero,
+  .ep-hero {
     min-height: auto;
   }
 
-  .hero-portrait {
+  .hero-portrait,
+  .ep-visual {
     max-width: 520px;
   }
 
@@ -750,7 +980,10 @@ section {
   .work-grid,
   .notes-layout,
   .about-grid,
-  .contact {
+  .contact,
+  .ep-summary,
+  .ep-service-grid,
+  .ep-deliverable-list {
     grid-template-columns: 1fr;
   }
 
@@ -770,13 +1003,36 @@ section {
 
   .nav {
     width: 100%;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     gap: 8px;
     font-size: 12px;
   }
 
+  .nav a {
+    margin-right: 12px;
+  }
+
   .hero h1 {
     font-size: clamp(56px, 21vw, 92px);
+  }
+
+  .ep-hero h1,
+  .ep-process h2,
+  .ep-cta h2 {
+    max-width: calc(100vw - 44px);
+    font-size: clamp(34px, 10vw, 42px);
+    line-height: 1.08;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+  }
+
+  .ep-hero .lead {
+    max-width: calc(100vw - 44px);
+    font-size: 18px;
+    line-height: 1.32;
+    word-break: break-all;
+    overflow-wrap: anywhere;
   }
 
   .primary-link,
@@ -792,7 +1048,11 @@ section {
   .short-card div,
   .notes-main,
   .notes-side div,
-  .contact-form {
+  .contact-form,
+  .ep-summary div,
+  .ep-service-grid article,
+  .ep-steps article,
+  .ep-deliverable-list div {
     padding: 22px;
   }
 
@@ -812,5 +1072,9 @@ section {
 
   .spotmicro-copy {
     min-height: 340px;
+  }
+
+  .ep-process-copy {
+    min-height: 360px;
   }
 }
