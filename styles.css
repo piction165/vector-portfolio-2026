@@ -1086,6 +1086,12 @@ section {
   line-height: 1.12;
 }
 
+.case-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
 .case-gallery figure {
   margin: 0;
   overflow: hidden;
@@ -1156,6 +1162,10 @@ section {
   .case-copy-grid,
   .case-service-grid,
   .case-deliverable-list {
+    grid-template-columns: 1fr;
+  }
+
+  .case-gallery-grid {
     grid-template-columns: 1fr;
   }
 
