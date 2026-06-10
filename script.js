@@ -140,6 +140,7 @@ const createConsultChat = () => {
   const note = chat.querySelector("[data-chat-note]");
   let topic = "일반 문의";
   let history = [];
+  let hasSentStartNotice = false;
 
   const setOpen = (isOpen) => {
     panel.hidden = !isOpen;
@@ -192,6 +193,10 @@ const createConsultChat = () => {
       history.push({ role: "assistant", content: safeReply });
       history = history.slice(-10);
       note.textContent = "견적이나 미팅이 필요하면 이메일/연락처를 남겨주세요.";
+      if (!hasSentStartNotice) {
+        hasSentStartNotice = true;
+        sendChatSummary({ silent: true });
+      }
     } catch (error) {
       appendMessage("지금 자동 상담 연결이 불안정합니다. 프로젝트 내용과 연락처를 vector@geekble.kr로 보내주시면 확인하겠습니다.", "bot");
       note.textContent = "일시적으로 답변 생성에 실패했습니다.";
@@ -200,28 +205,7 @@ const createConsultChat = () => {
     }
   };
 
-  toggle.addEventListener("click", () => setOpen(panel.hidden));
-  close.addEventListener("click", () => setOpen(false));
-
-  options.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-chat-topic]");
-    if (!button) return;
-
-    topic = button.dataset.chatTopic || "일반 문의";
-    sendMessage(`${topic} 관련 상담을 받고 싶습니다.`);
-  });
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const data = new FormData(form);
-    const message = String(data.get("message") || "").trim();
-    const messageField = form.querySelector('textarea[name="message"]');
-    if (messageField) messageField.value = "";
-    await sendMessage(message);
-  });
-
-  notifyButton.addEventListener("click", async () => {
+  const sendChatSummary = async ({ silent = false } = {}) => {
     if (history.length === 0) {
       note.textContent = "먼저 상담 대화를 시작해주세요.";
       return;
@@ -230,8 +214,10 @@ const createConsultChat = () => {
     const data = new FormData(form);
     const contact = String(data.get("contact") || "").trim();
 
-    notifyButton.disabled = true;
-    note.textContent = "상담 내용을 요약해 전송하는 중입니다.";
+    if (!silent) {
+      notifyButton.disabled = true;
+      note.textContent = "상담 내용을 요약해 전송하는 중입니다.";
+    }
 
     try {
       const response = await fetch(vectorChatEndpoint, {
@@ -267,18 +253,45 @@ const createConsultChat = () => {
       }
 
       if (needsActivation) {
-        appendMessage("상담 요약은 준비됐고, 수신 메일함에서 FormSubmit 활성화 링크를 한 번 승인하면 이후부터 메일로 전달됩니다.", "bot");
+        if (!silent) {
+          appendMessage("상담 요약은 준비됐고, 수신 메일함에서 FormSubmit 활성화 링크를 한 번 승인하면 이후부터 메일로 전달됩니다.", "bot");
+        }
         note.textContent = "vector@geekble.kr 메일함의 FormSubmit 활성화 링크를 승인해주세요.";
-      } else {
+      } else if (!silent) {
         appendMessage("상담 요약을 Vector에게 보냈습니다. 연락처를 남겼다면 확인 후 회신드릴게요.", "bot");
         note.textContent = "상담 요약이 vector@geekble.kr로 전송되었습니다.";
       }
     } catch (error) {
-      note.textContent = "요약 전송에 실패했습니다. 대화 내용을 복사해 vector@geekble.kr로 보내주세요.";
+      if (!silent) {
+        note.textContent = "요약 전송에 실패했습니다. 대화 내용을 복사해 vector@geekble.kr로 보내주세요.";
+      }
     } finally {
-      notifyButton.disabled = false;
+      if (!silent) notifyButton.disabled = false;
     }
+  };
+
+  toggle.addEventListener("click", () => setOpen(panel.hidden));
+  close.addEventListener("click", () => setOpen(false));
+
+  options.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-chat-topic]");
+    if (!button) return;
+
+    topic = button.dataset.chatTopic || "일반 문의";
+    sendMessage(`${topic} 관련 상담을 받고 싶습니다.`);
   });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const data = new FormData(form);
+    const message = String(data.get("message") || "").trim();
+    const messageField = form.querySelector('textarea[name="message"]');
+    if (messageField) messageField.value = "";
+    await sendMessage(message);
+  });
+
+  notifyButton.addEventListener("click", () => sendChatSummary());
 };
 
 createConsultChat();
