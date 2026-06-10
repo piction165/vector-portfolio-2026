@@ -4,6 +4,7 @@ const nextButton = document.querySelector("[data-carousel-next]");
 const contactForm = document.querySelector("[data-contact-form]");
 const contactNote = document.querySelector("[data-contact-note]");
 const inquiryEndpoint = "https://formsubmit.co/ajax/vector@geekble.kr";
+const vectorChatEndpoint = "/api/vector-chat";
 
 if (track && prevButton && nextButton) {
   const getStep = () => {
@@ -106,7 +107,7 @@ const createConsultChat = () => {
             <button type="button" aria-label="상담 챗봇 닫기" data-chat-close>×</button>
           </header>
           <div class="consult-chat-messages" data-chat-messages>
-            <p class="bot-message">어떤 작업을 상담할까요? 아래에서 가까운 항목을 골라주세요.</p>
+            <p class="bot-message">안녕하세요. 로봇 제작, eP 커스텀, 행사 운영, 영상 제작 중 어떤 상담이 필요하신가요?</p>
           </div>
           <div class="consult-chat-options" data-chat-options>
             <button type="button" data-chat-topic="eP 로봇 커스텀">eP 로봇 커스텀</button>
@@ -115,10 +116,9 @@ const createConsultChat = () => {
             <button type="button" data-chat-topic="행사/전시 운영">행사/전시 운영</button>
           </div>
           <form class="consult-chat-form" data-chat-form>
-            <input name="email" type="email" autocomplete="email" placeholder="회신 받을 이메일" required />
-            <textarea name="message" rows="3" placeholder="프로젝트 내용, 일정, 예산감 등을 적어주세요." required></textarea>
-            <button type="submit">상담 보내기</button>
-            <p data-chat-note>선택한 항목과 메시지가 vector@geekble.kr로 전달됩니다.</p>
+            <textarea name="message" rows="3" placeholder="궁금한 내용을 입력하세요." required></textarea>
+            <button type="submit">보내기</button>
+            <p data-chat-note>상담을 이어가다가 필요하면 연락처를 남겨주세요.</p>
           </form>
         </section>
       </aside>
@@ -134,6 +134,7 @@ const createConsultChat = () => {
   const form = chat.querySelector("[data-chat-form]");
   const note = chat.querySelector("[data-chat-note]");
   let topic = "일반 문의";
+  let history = [];
 
   const setOpen = (isOpen) => {
     panel.hidden = !isOpen;
@@ -148,6 +149,47 @@ const createConsultChat = () => {
     messages.scrollTop = messages.scrollHeight;
   };
 
+  const askVectorChat = async (message) => {
+    note.textContent = "답변을 준비하는 중입니다.";
+
+    const response = await fetch(vectorChatEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topic, message, history }),
+    });
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error || "chat_failed");
+    }
+
+    return String(result.reply || "").trim();
+  };
+
+  const sendMessage = async (message) => {
+    const text = String(message || "").trim();
+    if (!text) return;
+
+    const button = form.querySelector('button[type="submit"]');
+    appendMessage(text, "user");
+    history.push({ role: "user", content: text });
+
+    if (button) button.disabled = true;
+    try {
+      const reply = await askVectorChat(text);
+      const safeReply = reply || "좋습니다. 프로젝트 목적과 일정, 필요한 산출물을 조금 더 알려주세요.";
+      appendMessage(safeReply, "bot");
+      history.push({ role: "assistant", content: safeReply });
+      history = history.slice(-10);
+      note.textContent = "견적이나 미팅이 필요하면 이메일/연락처를 남겨주세요.";
+    } catch (error) {
+      appendMessage("지금 자동 상담 연결이 불안정합니다. 프로젝트 내용과 연락처를 vector@geekble.kr로 보내주시면 확인하겠습니다.", "bot");
+      note.textContent = "일시적으로 답변 생성에 실패했습니다.";
+    } finally {
+      if (button) button.disabled = false;
+    }
+  };
+
   toggle.addEventListener("click", () => setOpen(panel.hidden));
   close.addEventListener("click", () => setOpen(false));
 
@@ -156,57 +198,16 @@ const createConsultChat = () => {
     if (!button) return;
 
     topic = button.dataset.chatTopic || "일반 문의";
-    appendMessage(topic, "user");
-    appendMessage("좋습니다. 목적, 필요한 산출물, 희망 일정만 간단히 남겨주시면 상담 메일로 정리해둘게요.", "bot");
+    sendMessage(`${topic} 관련 상담을 받고 싶습니다.`);
   });
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const data = new FormData(form);
-    const email = String(data.get("email") || "").trim();
     const message = String(data.get("message") || "").trim();
-    const button = form.querySelector('button[type="submit"]');
-
-    if (button) button.disabled = true;
-    note.textContent = "상담 내용을 전송하는 중입니다.";
-
-    try {
-      const response = await fetch(inquiryEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          _subject: `[Vector Bot 상담] ${topic}`,
-          _template: "table",
-          _captcha: "false",
-          _replyto: email,
-          topic,
-          email,
-          message,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to send consultation");
-      }
-
-      const result = await response.json();
-      const needsActivation = String(result.message || "").toLowerCase().includes("activation");
-
-      if (result.success === "false" && !needsActivation) {
-        throw new Error("Failed to send consultation");
-      }
-
-      appendMessage("상담 요청이 전송됐습니다. 확인 후 회신드릴게요.", "bot");
-      form.reset();
-      note.textContent = needsActivation
-        ? "수신 메일함에서 FormSubmit 확인 링크를 승인하면 문의 수신이 시작됩니다."
-        : "상담 요청이 전송되었습니다.";
-    } catch (error) {
-      note.textContent = "전송에 실패했습니다. vector@geekble.kr로 직접 보내주세요.";
-    } finally {
-      if (button) button.disabled = false;
-    }
+    form.reset();
+    await sendMessage(message);
   });
 };
 
