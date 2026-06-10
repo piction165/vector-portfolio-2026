@@ -245,7 +245,28 @@ const createConsultChat = () => {
         throw new Error(result.error || "notification_failed");
       }
 
-      if (result.needsActivation) {
+      const mailResponse = await fetch(inquiryEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _subject: `[Vector Chat 상담 요약] ${topic}`,
+          _template: "table",
+          _captcha: "false",
+          _replyto: contact,
+          topic,
+          contact: contact || "(미입력)",
+          summary: result.summary || "(요약 없음)",
+          transcript: result.transcript || history.map((item) => `${item.role}: ${item.content}`).join("\n"),
+        }),
+      });
+      const mailResult = await mailResponse.json();
+      const needsActivation = String(mailResult.message || "").toLowerCase().includes("activation");
+
+      if (!mailResponse.ok || (mailResult.success === "false" && !needsActivation)) {
+        throw new Error("mail_failed");
+      }
+
+      if (needsActivation) {
         appendMessage("상담 요약은 준비됐고, 수신 메일함에서 FormSubmit 활성화 링크를 한 번 승인하면 이후부터 메일로 전달됩니다.", "bot");
         note.textContent = "vector@geekble.kr 메일함의 FormSubmit 활성화 링크를 승인해주세요.";
       } else {
