@@ -808,7 +808,7 @@ section {
   padding-top: 0;
 }
 
-.case-summary div,
+.case-summary > div,
 .case-service-grid article,
 .case-steps article,
 .case-deliverable-list article {
@@ -817,7 +817,7 @@ section {
   box-shadow: var(--shadow-soft);
 }
 
-.case-summary div {
+.case-summary > div {
   display: grid;
   align-content: space-between;
   min-height: 180px;
@@ -838,6 +838,80 @@ section {
   margin-top: 28px;
   font-size: clamp(23px, 2.4vw, 36px);
   line-height: 1.12;
+}
+
+.partner-card {
+  gap: 16px;
+}
+
+.partner-card strong {
+  margin-top: 8px;
+}
+
+.partner-logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.partner-logo {
+  display: inline-grid;
+  align-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.partner-logo b,
+.partner-logo small {
+  display: block;
+  line-height: 1.08;
+}
+
+.partner-logo b {
+  color: #111;
+  font-size: 18px;
+  font-weight: 880;
+}
+
+.partner-logo small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.partner-logo.seoul-city {
+  min-width: 0;
+}
+
+.partner-logo.seoul-city b {
+  font-size: 22px;
+  letter-spacing: 0;
+}
+
+.partner-logo.seoul-ai {
+  min-width: 0;
+}
+
+.partner-logo.doro {
+  min-width: 0;
+  border-color: rgba(0, 128, 255, 0.22);
+  color: #1286f8;
+}
+
+.partner-logo.doro b {
+  color: #1286f8;
+  font-size: 24px;
+  font-weight: 760;
+  letter-spacing: 0.01em;
 }
 
 .case-service-grid {
@@ -1100,7 +1174,7 @@ section {
   .notes-main,
   .notes-side div,
   .contact-form,
-  .case-summary div,
+  .case-summary > div,
   .case-copy-grid article,
   .case-service-grid article,
   .case-steps article,
@@ -1128,5 +1202,9 @@ section {
 
   .case-process-copy {
     min-height: 360px;
+  }
+
+  .partner-logos {
+    grid-template-columns: 1fr;
   }
 }
