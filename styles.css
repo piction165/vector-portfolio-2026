@@ -898,6 +898,12 @@ section {
   resize: vertical;
 }
 
+.consult-chat-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
 .consult-chat-form button {
   min-height: 44px;
   border: 0;
@@ -908,6 +914,12 @@ section {
   font: inherit;
   font-size: 14px;
   font-weight: 820;
+}
+
+.consult-chat-actions button + button {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: #111;
 }
 
 .consult-chat-form button:disabled {
@@ -1430,5 +1442,9 @@ section {
 
   .consult-chat-messages {
     max-height: 180px;
+  }
+
+  .consult-chat-actions {
+    grid-template-columns: 1fr;
   }
 }

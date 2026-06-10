@@ -117,7 +117,11 @@ const createConsultChat = () => {
           </div>
           <form class="consult-chat-form" data-chat-form>
             <textarea name="message" rows="3" placeholder="궁금한 내용을 입력하세요." required></textarea>
-            <button type="submit">보내기</button>
+            <input name="contact" type="text" autocomplete="email" placeholder="연락처 또는 이메일 선택 입력" />
+            <div class="consult-chat-actions">
+              <button type="submit">보내기</button>
+              <button type="button" data-chat-notify>요약 보내기</button>
+            </div>
             <p data-chat-note>상담을 이어가다가 필요하면 연락처를 남겨주세요.</p>
           </form>
         </section>
@@ -132,6 +136,7 @@ const createConsultChat = () => {
   const messages = chat.querySelector("[data-chat-messages]");
   const options = chat.querySelector("[data-chat-options]");
   const form = chat.querySelector("[data-chat-form]");
+  const notifyButton = chat.querySelector("[data-chat-notify]");
   const note = chat.querySelector("[data-chat-note]");
   let topic = "일반 문의";
   let history = [];
@@ -155,7 +160,12 @@ const createConsultChat = () => {
     const response = await fetch(vectorChatEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ topic, message, history }),
+      body: JSON.stringify({
+        topic,
+        message,
+        contact: String(new FormData(form).get("contact") || "").trim(),
+        history,
+      }),
     });
 
     const result = await response.json();
@@ -206,8 +216,42 @@ const createConsultChat = () => {
 
     const data = new FormData(form);
     const message = String(data.get("message") || "").trim();
-    form.reset();
+    const messageField = form.querySelector('textarea[name="message"]');
+    if (messageField) messageField.value = "";
     await sendMessage(message);
+  });
+
+  notifyButton.addEventListener("click", async () => {
+    if (history.length === 0) {
+      note.textContent = "먼저 상담 대화를 시작해주세요.";
+      return;
+    }
+
+    const data = new FormData(form);
+    const contact = String(data.get("contact") || "").trim();
+
+    notifyButton.disabled = true;
+    note.textContent = "상담 내용을 요약해 전송하는 중입니다.";
+
+    try {
+      const response = await fetch(vectorChatEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "notify", topic, contact, history }),
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || "notification_failed");
+      }
+
+      appendMessage("상담 요약을 Vector에게 보냈습니다. 연락처를 남겼다면 확인 후 회신드릴게요.", "bot");
+      note.textContent = "상담 요약이 vector@geekble.kr로 전송되었습니다.";
+    } catch (error) {
+      note.textContent = "요약 전송에 실패했습니다. 대화 내용을 복사해 vector@geekble.kr로 보내주세요.";
+    } finally {
+      notifyButton.disabled = false;
+    }
   });
 };
 
