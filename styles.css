@@ -1134,6 +1134,11 @@ section {
   object-fit: cover;
 }
 
+.contain-gallery img {
+  object-fit: contain;
+  background: #f7f7f2;
+}
+
 .ep-gallery-grid img {
   object-fit: contain;
   background: #101010;
