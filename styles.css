@@ -1,13 +1,17 @@
 :root {
-  color-scheme: light;
-  --bg: #ffffff;
-  --ink: #111111;
-  --muted: #6e6e73;
-  --soft: #f5f5f7;
-  --line: #e8e8ed;
-  --panel: rgba(255, 255, 255, 0.92);
-  --shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
-  --shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.08);
+  color-scheme: dark;
+  --bg: #000000;
+  --ink: #f7f7f2;
+  --muted: #9b9b9b;
+  --soft: #171717;
+  --line: rgba(0, 199, 230, 0.18);
+  --panel: rgba(23, 23, 23, 0.84);
+  --panel-strong: #171717;
+  --accent: #00c7e6;
+  --accent-soft: rgba(0, 199, 230, 0.12);
+  --accent-line: rgba(0, 199, 230, 0.44);
+  --shadow: 0 30px 90px rgba(0, 0, 0, 0.62);
+  --shadow-soft: 0 16px 48px rgba(0, 0, 0, 0.38);
   --radius: 28px;
 }
 
@@ -17,13 +21,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(0, 199, 230, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 199, 230, 0.055) 1px, transparent 1px),
     var(--bg);
   background-size: 56px 56px;
   color: var(--ink);
@@ -33,6 +38,7 @@ body {
   line-height: 1.55;
   word-break: keep-all;
   overflow-wrap: break-word;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -41,8 +47,9 @@ body::before {
   z-index: -1;
   content: "";
   background:
-    radial-gradient(circle at 76% 8%, rgba(0, 0, 0, 0.08), transparent 22%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.74), #fff 52%);
+    radial-gradient(circle at 78% 10%, rgba(0, 199, 230, 0.2), transparent 24%),
+    radial-gradient(circle at 8% 38%, rgba(0, 199, 230, 0.07), transparent 22%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.54), #000 58%);
   pointer-events: none;
 }
 
@@ -69,12 +76,13 @@ section {
   justify-content: space-between;
   min-height: 52px;
   padding: 0 clamp(20px, 5vw, 76px);
-  background: rgba(255, 255, 255, 0.82);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.78);
+  border-bottom: 1px solid rgba(0, 199, 230, 0.16);
   backdrop-filter: saturate(180%) blur(20px);
 }
 
 .brand {
+  color: var(--accent);
   font-size: 15px;
   font-weight: 800;
 }
@@ -83,14 +91,14 @@ section {
   display: flex;
   align-items: center;
   gap: clamp(14px, 2.5vw, 30px);
-  color: #1d1d1f;
+  color: rgba(247, 247, 242, 0.82);
   font-size: 13px;
   font-weight: 650;
 }
 
 .nav a:hover,
 .footer a:hover {
-  color: var(--muted);
+  color: var(--accent);
 }
 
 .hero {
@@ -110,7 +118,7 @@ section {
 
 .eyebrow {
   margin: 0 0 14px;
-  color: var(--muted);
+  color: var(--accent);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -133,7 +141,7 @@ section {
 .lead {
   max-width: 720px;
   margin: 28px 0 0;
-  color: #303033;
+  color: rgba(247, 247, 242, 0.78);
   font-size: clamp(22px, 2.6vw, 36px);
   line-height: 1.23;
   font-weight: 700;
@@ -163,16 +171,16 @@ section {
 
 .primary-link,
 .contact-links a:first-child {
-  background: #111;
-  color: #fff;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+  background: var(--accent);
+  color: #07110d;
+  box-shadow: 0 18px 48px rgba(0, 199, 230, 0.22);
 }
 
 .secondary-link,
 .contact-links a {
-  background: #fff;
-  color: #111;
-  border: 1px solid var(--line);
+  background: rgba(23, 23, 23, 0.78);
+  color: var(--ink);
+  border: 1px solid var(--accent-line);
 }
 
 .primary-link:hover,
@@ -188,7 +196,7 @@ section {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 38px;
-  background: #fff;
+  background: var(--panel-strong);
   box-shadow: var(--shadow);
 }
 
@@ -196,7 +204,7 @@ section {
   position: absolute;
   inset: 18px;
   content: "";
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 199, 230, 0.28);
   border-radius: 28px;
   pointer-events: none;
 }
@@ -235,6 +243,7 @@ section {
   background: var(--panel);
   border: 1px solid var(--line);
   box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
 }
 
 .intro-band div {
@@ -291,12 +300,18 @@ section {
 
 .work-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 30px 86px rgba(0, 199, 230, 0.12), var(--shadow-soft);
 }
 
 .work-card figure {
   margin: 0;
   background: var(--soft);
+}
+
+.work-card figure,
+.short-card img,
+.robot-card figure {
+  border-bottom: 1px solid rgba(0, 199, 230, 0.14);
 }
 
 .work-card img {
@@ -312,11 +327,11 @@ section {
   gap: 12px;
   width: 100%;
   aspect-ratio: 16 / 9;
-  color: #111;
+  color: var(--ink);
   background:
-    linear-gradient(rgba(0, 0, 0, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.055) 1px, transparent 1px),
-    #f7f7f9;
+    linear-gradient(rgba(0, 199, 230, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 199, 230, 0.08) 1px, transparent 1px),
+    #101010;
   background-size: 28px 28px;
 }
 
@@ -325,9 +340,9 @@ section {
   place-items: center;
   width: 42px;
   height: 42px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--accent-line);
   border-radius: 50%;
-  background: #fff;
+  background: var(--panel-strong);
   box-shadow: var(--shadow-soft);
   font-size: 12px;
   font-weight: 850;
@@ -359,7 +374,7 @@ section {
 }
 
 .work-copy span {
-  color: #111;
+  color: var(--accent);
   font-size: 14px;
   font-weight: 800;
 }
@@ -394,7 +409,7 @@ section {
 
 .short-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 26px 76px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 28px 80px rgba(0, 199, 230, 0.12), var(--shadow-soft);
 }
 
 .short-card a {
@@ -422,7 +437,7 @@ section {
 }
 
 .short-card span {
-  color: #111;
+  color: var(--accent);
   font-size: 14px;
   font-weight: 800;
 }
@@ -435,10 +450,10 @@ section {
   place-items: center;
   width: 46px;
   height: 46px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--accent-line);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
-  color: #111;
+  background: rgba(23, 23, 23, 0.92);
+  color: var(--accent);
   box-shadow: var(--shadow-soft);
   cursor: pointer;
   font-size: 34px;
@@ -490,7 +505,7 @@ section {
 .notes-main p {
   max-width: 1040px;
   margin: 0;
-  color: #2c2c2f;
+  color: rgba(247, 247, 242, 0.76);
   font-size: clamp(18px, 1.8vw, 24px);
   font-weight: 620;
   line-height: 1.72;
@@ -543,7 +558,7 @@ section {
 
 .robot-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 30px 86px rgba(0, 199, 230, 0.12), var(--shadow-soft);
 }
 
 .robot-card a {
@@ -556,9 +571,9 @@ section {
   place-items: center;
   margin: 0;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    #fff;
+    linear-gradient(rgba(0, 199, 230, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 199, 230, 0.08) 1px, transparent 1px),
+    #101010;
   background-size: 32px 32px;
 }
 
@@ -596,7 +611,7 @@ section {
 }
 
 .robot-copy span {
-  color: #111;
+  color: var(--accent);
   font-size: 14px;
   font-weight: 820;
 }
@@ -641,7 +656,7 @@ section {
 .contact-copy > p:not(.eyebrow) {
   max-width: 760px;
   margin: 24px 0 0;
-  color: #303033;
+  color: rgba(247, 247, 242, 0.76);
   font-size: clamp(18px, 2vw, 24px);
   font-weight: 680;
   line-height: 1.45;
@@ -674,7 +689,7 @@ section {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.46);
   color: var(--ink);
   font: inherit;
   font-size: 16px;
@@ -696,8 +711,8 @@ section {
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  border-color: #111;
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 199, 230, 0.14);
 }
 
 .contact-form button {
@@ -707,8 +722,8 @@ section {
   min-height: 52px;
   border: 0;
   border-radius: 999px;
-  background: #111;
-  color: #fff;
+  background: var(--accent);
+  color: #07110d;
   cursor: pointer;
   font: inherit;
   font-size: 15px;
@@ -735,7 +750,7 @@ section {
 }
 
 .case-page {
-  background-color: #fbfbfd;
+  background-color: #000;
 }
 
 .case-hero,
@@ -788,7 +803,7 @@ section {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 38px;
-  background: #fff;
+  background: var(--panel-strong);
   box-shadow: var(--shadow);
 }
 
@@ -802,9 +817,9 @@ section {
   padding: clamp(8px, 2vw, 24px);
   object-fit: contain;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-    #fff;
+    linear-gradient(rgba(0, 199, 230, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 199, 230, 0.07) 1px, transparent 1px),
+    #101010;
   background-size: 32px 32px;
 }
 
@@ -887,9 +902,9 @@ section {
   min-width: 0;
   min-height: 52px;
   padding: 10px 14px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 199, 230, 0.18);
   border-radius: 16px;
-  background: #fff;
+  background: #f7f7f2;
 }
 
 .partner-logo img {
@@ -991,6 +1006,10 @@ section {
   gap: 18px;
 }
 
+.compact-copy-grid {
+  margin-top: 18px;
+}
+
 .case-copy-grid article {
   min-height: 320px;
   padding: clamp(24px, 3vw, 40px);
@@ -1004,6 +1023,10 @@ section {
   margin: 0 0 18px;
   font-size: clamp(30px, 3vw, 48px);
   line-height: 1.08;
+}
+
+.compact-copy-grid h3 {
+  font-size: clamp(25px, 2.4vw, 36px);
 }
 
 .case-process {
@@ -1020,14 +1043,14 @@ section {
   min-height: 460px;
   padding: clamp(28px, 5vw, 58px);
   border-radius: 36px;
-  background: #111;
-  color: #fff;
+  background: #171717;
+  color: var(--ink);
   box-shadow: var(--shadow);
 }
 
 .case-process-copy .eyebrow,
 .case-process-copy p {
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(247, 247, 242, 0.7);
 }
 
 .case-process-copy p {
@@ -1092,12 +1115,16 @@ section {
   gap: 22px;
 }
 
+.ep-gallery-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .case-gallery figure {
   margin: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 36px;
-  background: #fff;
+  background: var(--panel-strong);
   box-shadow: var(--shadow);
 }
 
@@ -1109,7 +1136,7 @@ section {
 
 .ep-gallery-grid img {
   object-fit: contain;
-  background: #fff;
+  background: #101010;
 }
 
 .ep-product-cut img {
@@ -1140,7 +1167,7 @@ section {
   font-size: 13px;
 }
 
-@media (max-width: 940px) {
+@media (max-width: 1040px) {
   .hero,
   .robot-grid,
   .case-hero,
@@ -1159,6 +1186,7 @@ section {
 
   .hero-portrait,
   .case-visual {
+    width: min(100%, 520px);
     max-width: 520px;
   }
 
