@@ -145,8 +145,15 @@ section {
   text-wrap: balance;
 }
 
+.hero h1.hero-title span {
+  display: block;
+  color: var(--ink);
+  font-size: clamp(58px, 8.8vw, 132px);
+  line-height: 0.96;
+}
+
 .hero-name {
-  margin: 26px 0 0;
+  margin: 22px 0 0;
   color: var(--ink);
   font-size: clamp(30px, 4.2vw, 62px);
   font-weight: 850;
@@ -1407,6 +1414,11 @@ section {
     line-height: 1.14;
     word-break: keep-all;
     overflow-wrap: anywhere;
+  }
+
+  .hero h1.hero-title span {
+    font-size: clamp(52px, 17vw, 82px);
+    line-height: 0.96;
   }
 
   .hero-name {
