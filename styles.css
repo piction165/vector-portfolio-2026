@@ -134,7 +134,7 @@ section {
 }
 
 .hero h1 {
-  font-size: clamp(70px, 12vw, 178px);
+  font-size: clamp(58px, 8.8vw, 132px);
   font-weight: 850;
 }
 
@@ -145,6 +145,23 @@ section {
   font-size: clamp(22px, 2.6vw, 36px);
   line-height: 1.23;
   font-weight: 700;
+}
+
+.role-line {
+  margin: 22px 0 0;
+  color: var(--accent);
+  font-size: clamp(18px, 2vw, 28px);
+  font-weight: 850;
+  letter-spacing: 0.02em;
+}
+
+.brand-line {
+  margin: 24px 0 0;
+  color: var(--ink);
+  font-size: clamp(15px, 1.5vw, 20px);
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .hero-actions,
@@ -219,6 +236,9 @@ section {
 .works,
 .shorts,
 .project-notes,
+.profile-summary,
+.experience,
+.events-field,
 .physical-robots,
 .about,
 .contact {
@@ -229,7 +249,7 @@ section {
 
 .intro-band {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   padding-top: 0;
 }
@@ -535,6 +555,129 @@ section {
   margin-top: 28px;
   font-size: clamp(22px, 2.2vw, 32px);
   line-height: 1.18;
+}
+
+.experience,
+.events-field {
+  padding-top: 0;
+}
+
+.experience-card,
+.content-list article,
+.event-card {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.experience-card {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.5fr) repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: clamp(24px, 4vw, 44px);
+  border-radius: 32px;
+}
+
+.experience-meta,
+.experience-body {
+  min-width: 0;
+}
+
+.experience-meta span,
+.content-list span,
+.event-card span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.experience-meta strong {
+  display: block;
+  font-size: clamp(34px, 5vw, 72px);
+  line-height: 0.96;
+}
+
+.experience-meta p,
+.event-card p {
+  margin: 16px 0 0;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 820;
+}
+
+.experience-body h3 {
+  margin: 0 0 16px;
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.12;
+}
+
+.experience-body ul,
+.event-card ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(247, 247, 242, 0.76);
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.content-list {
+  display: grid;
+  gap: 14px;
+}
+
+.content-list article {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.22fr) minmax(0, 1fr) minmax(200px, 0.4fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: 22px 24px;
+  border-radius: 22px;
+}
+
+.content-list h3,
+.event-card h3 {
+  margin: 0;
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.14;
+}
+
+.content-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.content-list a {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.event-card {
+  display: grid;
+  gap: 18px;
+  padding: clamp(24px, 3.4vw, 40px);
+  border-radius: 28px;
+}
+
+.event-card strong {
+  color: var(--accent);
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.2;
 }
 
 .physical-robots {
@@ -1198,6 +1341,9 @@ section {
   .intro-band,
   .work-grid,
   .notes-layout,
+  .experience-card,
+  .content-list article,
+  .event-grid,
   .about-grid,
   .contact,
   .case-summary,
@@ -1238,7 +1384,7 @@ section {
   }
 
   .hero h1 {
-    font-size: clamp(56px, 21vw, 92px);
+    font-size: clamp(48px, 17vw, 82px);
   }
 
   .case-hero h1,
@@ -1272,6 +1418,9 @@ section {
   .short-card div,
   .notes-main,
   .notes-side div,
+  .experience-card,
+  .content-list article,
+  .event-card,
   .contact-form,
   .case-summary > div,
   .case-copy-grid article,
@@ -1284,6 +1433,25 @@ section {
   .notes-main p {
     font-size: 17px;
     line-height: 1.68;
+  }
+
+  .lead {
+    font-size: 20px;
+    line-height: 1.32;
+  }
+
+  .role-line {
+    font-size: 16px;
+  }
+
+  .content-list article {
+    align-items: start;
+    gap: 8px;
+  }
+
+  .content-list span,
+  .content-list a {
+    margin: 0;
   }
 
   .shorts-track {
