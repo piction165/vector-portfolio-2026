@@ -138,6 +138,21 @@ section {
   font-weight: 850;
 }
 
+.hero h1.hero-title {
+  max-width: 940px;
+  font-size: clamp(44px, 5.9vw, 86px);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.hero-name {
+  margin: 26px 0 0;
+  color: var(--ink);
+  font-size: clamp(30px, 4.2vw, 62px);
+  font-weight: 850;
+  line-height: 1.05;
+}
+
 .lead {
   max-width: 720px;
   margin: 28px 0 0;
@@ -1385,6 +1400,18 @@ section {
 
   .hero h1 {
     font-size: clamp(48px, 17vw, 82px);
+  }
+
+  .hero h1.hero-title {
+    font-size: clamp(34px, 10.5vw, 56px);
+    line-height: 1.14;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-name {
+    margin-top: 20px;
+    font-size: clamp(26px, 9vw, 42px);
   }
 
   .case-hero h1,
