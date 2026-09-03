@@ -1682,6 +1682,40 @@ section {
   color: var(--muted);
 }
 
+/* About page: compact cards */
+.about-page .case-copy-grid article {
+  min-height: 0;
+  padding: 26px 28px 28px;
+}
+
+.about-page .case-copy-grid h3 {
+  margin-bottom: 12px;
+  font-size: 21px;
+}
+
+.about-page .case-copy-grid p {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.about-page .case-steps article {
+  padding: 20px 24px;
+}
+
+.about-page .case-steps strong {
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.about-page .case-process-copy h2 {
+  font-size: clamp(26px, 3vw, 40px);
+}
+
+.about-page .case-process-copy {
+  min-height: 0;
+}
+
 .about-date {
   display: block;
   margin-top: 4px;
