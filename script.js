@@ -3,7 +3,7 @@ const prevButton = document.querySelector("[data-carousel-prev]");
 const nextButton = document.querySelector("[data-carousel-next]");
 const contactForm = document.querySelector("[data-contact-form]");
 const contactNote = document.querySelector("[data-contact-note]");
-const inquiryEndpoint = "https://formsubmit.co/ajax/vector@geekble.kr";
+const inquiryEndpoint = "https://formsubmit.co/ajax/vectorr165@gmail.com";
 
 if (track && prevButton && nextButton) {
   const getStep = () => {
@@ -79,7 +79,7 @@ if (contactForm) {
       }
     } catch (error) {
       if (contactNote) {
-        contactNote.textContent = "전송에 실패했습니다. 잠시 후 다시 시도하거나 vector@geekble.kr로 보내주세요.";
+        contactNote.textContent = "전송에 실패했습니다. 잠시 후 다시 시도하거나 vectorr165@gmail.com로 보내주세요.";
       }
     } finally {
       if (button) button.disabled = false;
