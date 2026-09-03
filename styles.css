@@ -1511,3 +1511,281 @@ section {
   }
 
 }
+
+/* CV page */
+.cv-intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 140px 6vw 20px;
+}
+
+.cv-intro .section-head {
+  margin-bottom: 0;
+}
+
+.cv-intro .lead {
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+.cv-print-button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.cv-sheet {
+  max-width: 900px;
+  margin: 36px auto 0;
+  padding: 52px clamp(24px, 5vw, 64px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow-soft);
+}
+
+.cv-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--accent-line);
+}
+
+.cv-head h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.1;
+}
+
+.cv-head h1 span {
+  color: var(--accent);
+}
+
+.cv-role {
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cv-contact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
+  font-size: 14px;
+  display: grid;
+  gap: 6px;
+}
+
+.cv-contact a:hover {
+  color: var(--accent);
+}
+
+.cv-section {
+  padding-top: 34px;
+}
+
+.cv-section > h2 {
+  margin: 0 0 18px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cv-section > p {
+  margin: 0;
+  color: var(--ink);
+}
+
+.cv-item {
+  padding: 0 0 20px;
+}
+
+.cv-item:last-child {
+  padding-bottom: 0;
+}
+
+.cv-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 16px;
+}
+
+.cv-item-head h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.cv-item-head h3 span {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cv-date {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.cv-item p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.cv-item ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  display: grid;
+  gap: 6px;
+}
+
+.cv-skills {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.cv-skills div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.cv-skills dt {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cv-skills dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+.about-date {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cv-cert-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  display: grid;
+  gap: 8px;
+}
+
+@media (max-width: 720px) {
+  .cv-intro {
+    padding-top: 120px;
+  }
+
+  .cv-contact {
+    text-align: left;
+  }
+
+  .cv-skills div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  html {
+    background: #ffffff !important;
+    color-scheme: light;
+  }
+
+  .cv-page {
+    background: #ffffff !important;
+    color: #111111;
+  }
+
+  .cv-page::before {
+    display: none;
+  }
+
+  .cv-page .cv-section > p,
+  .cv-page .cv-skills dt,
+  .cv-page .cv-item-head h3,
+  .cv-page .cv-head h1 {
+    color: #111111;
+  }
+
+  .cv-page .site-header,
+  .cv-page .cv-intro,
+  .cv-page .cv-cta,
+  .cv-page .footer {
+    display: none;
+  }
+
+  .cv-page .cv-sheet {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: #ffffff;
+    box-shadow: none;
+    color: #111111;
+  }
+
+  .cv-page .cv-head {
+    border-bottom-color: #111111;
+  }
+
+  .cv-page .cv-head h1 span {
+    color: #0a93aa;
+  }
+
+  .cv-page .cv-section > h2 {
+    color: #0a93aa;
+  }
+
+  .cv-page .cv-role,
+  .cv-page .cv-date,
+  .cv-page .cv-item p,
+  .cv-page .cv-item ul,
+  .cv-page .cv-skills dd,
+  .cv-page .cv-item-head h3 span {
+    color: #444444;
+  }
+
+  .cv-page .cv-section {
+    break-inside: avoid-page;
+    padding-top: 24px;
+  }
+
+  .cv-page a {
+    color: inherit;
+  }
+}
