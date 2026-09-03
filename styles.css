@@ -1683,6 +1683,13 @@ section {
 }
 
 /* About page: compact cards */
+.about-gallery-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
 .about-page .case-copy-grid article {
   min-height: 0;
   padding: 26px 28px 28px;
