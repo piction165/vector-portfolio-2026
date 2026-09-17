@@ -1,3 +1,35 @@
+const header = document.querySelector('.site-header');
+const navigation = document.querySelector('#site-navigation');
+const menuToggle = document.querySelector('.nav-toggle');
+if (header && navigation && menuToggle) {
+  const compact = window.matchMedia('(max-width: 900px)');
+  const setMenu = (open) => {
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    menuToggle.querySelector('span').textContent = open ? '×' : '☰';
+    navigation.hidden = compact.matches && !open;
+  };
+  const syncMenu = () => {
+    menuToggle.hidden = !compact.matches;
+    setMenu(false);
+  };
+  menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+  navigation.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setMenu(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      menuToggle.focus();
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (!header.contains(event.target)) setMenu(false);
+  });
+  compact.addEventListener('change', syncMenu);
+  syncMenu();
+}
+
 const track = document.querySelector("[data-shorts-track]");
 const prevButton = document.querySelector("[data-carousel-prev]");
 const nextButton = document.querySelector("[data-carousel-next]");
